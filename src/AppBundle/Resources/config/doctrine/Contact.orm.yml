@@ -1,0 +1,41 @@
+AppBundle\Entity\Contact:
+    type: entity
+    table: contacts
+    repositoryClass: AppBundle\Repository\ContactRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        firstname:
+            type: string
+            length: 255
+        lastname:
+            type: string
+            length: 255
+        streetno:
+            type: string
+            length: 255
+        zip:
+            type: string
+            length: 255
+        city:
+            type: string
+            length: 255
+        country:
+            type: string
+            length: 255
+        phonenumber:
+            type: integer
+        birthday:
+            type: datetime
+        email:
+            type: string
+            length: 255
+            unique: true
+        picture:
+            type: string
+            length: 255
+            nullable: true

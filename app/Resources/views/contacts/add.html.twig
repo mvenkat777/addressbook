@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1 class="mt-4">Add new contact</h1>
+  <form method="post" enctype="multipart/form-data" action="/add-contact">
+  	  <div class="form-row">	
+  	    <div class="form-group col-md-6">
+	      <label for="picture">Upload your profile picture (Optional)</label>
+	      <input type="file" class="form-control" id="picture" name="picture" accept="image/*" onchange="javascript:onImageUpload(event);">
+	      <!--<input type="file" class="form-control" id="picture1" name="picture1">-->
+	    </div>
+	    <div class="form-group col-md-6">
+	      <div id="show_picture">
+
+	      </div>
+	    </div>
+	  </div>  
+	  <div class="form-row">
+	    <div class="form-group col-md-6">
+	      <label for="firstname">Firstname</label>
+	      <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your firstname">
+	    </div>
+	    <div class="form-group col-md-6">
+	      <label for="lastname">Lastname</label>
+	      <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your lastname">
+	    </div>
+	  </div>  
+	  <div class="form-row">
+	    <div class="form-group col-md-6">
+	      <label for="email">Email</label>
+	      <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+	    </div>
+	    <div class="form-group col-md-6">
+	      <label for="birthday">Birthday</label>
+	      <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Pick your date of birth">
+	    </div>
+	  </div>
+	  <div class="form-row">
+	    <div class="form-group col-md-8">
+	      <label for="street">Street and number</label>
+	      <input type="text" class="form-control" id="street" name="street" placeholder="Enter your street and number">
+	    </div>
+	    <div class="form-group col-md-4">
+	      <label for="street">Phone number</label>
+	      <input type="text" class="form-control" id="phonenumber" name="phonenumber" placeholder="Enter your phone number">
+	    </div>
+	  </div>
+	  <div class="form-row">
+	    <div class="form-group col-md-4">
+	      <label for="zip">Zip</label>
+	      <input type="text" class="form-control" id="zip" name="zip" placeholder="Enter your zip code">
+	    </div>
+	    <div class="form-group col-md-4">
+	      <label for="city">City</label>
+	      <input type="text" class="form-control" id="city" name="city" placeholder="Enter your city">
+	    </div>
+	    <div class="form-group col-md-4">
+	      <label for="country">Country</label>
+	      <input type="text" class="form-control" id="country" name="country" placeholder="Enter your country">
+	    </div>
+	  </div>
+	  <div class="form-row">
+	  <div class="form-group col-md-12" align="center" >
+	      <button type="submit" class="btn btn-primary">Submit contact details</button>
+	    </div>
+	  </div>
+
+    </form>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript">       
+            // Initialize Smart Wizard
+           function onImageUpload(event) {
+           //alert(event.target.files.length);
+		      if (event.target.files.length > 0) {
+		          var profilePic = event.target.files[0];
+		          createImageFromBlob(profilePic)
+		      }
+    		}
+
+    		function createImageFromBlob(image) {
+			    let reader = new FileReader();
+			    reader.addEventListener("load", (e) => {
+			     var imageToShow = e.target['result'];
+			     $("#show_picture").empty().prepend('<img id="profilepicsshown" height="200px" src="'+imageToShow+'" />')
+			    }, false);
+
+			    if (image) {
+			      reader.readAsDataURL(image);
+			    }
+  			} 
+    </script>
+{% endblock %}  
