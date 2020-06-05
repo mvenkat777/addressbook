@@ -18,8 +18,7 @@ class ContactController extends Controller
     public function listAction(Request $request)
     {
         $contacts = $this->getDoctrine()->getRepository(Contact::class)->findAll();        
-        //var_dump($contacts);
-        //die("COMING INTO CONTACTS LIST");
+        
         return $this->render('contacts/view.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'contacts' => $contacts,
@@ -45,7 +44,6 @@ class ContactController extends Controller
      */
     public function contactsAddAction(Request $request, FileUploader $fileUploader)
     {
-        //var_dump($request);die("COMING INTO CONTACTS LIST");
         $entityManager = $this->getDoctrine()->getManager();
 
         $contact = new Contact();
@@ -65,15 +63,12 @@ class ContactController extends Controller
             $uploadedFileName = $fileUploader->upload($file, $this->getParameter('upload_images'));
             $contact->setPicture($uploadedFileName);
         }
-        //die("TEST");
-        //$contact->setPicture(null);
-        //var_dump($entityManager);die("TESt");
+        
         $entityManager->persist($contact);
 
         $entityManager->flush();
 
-        //return new Response('Saved new product with id '.$contact->getId());
-        // redirects to the "contacts" route
+        
         return $this->redirectToRoute('contacts');
     }
 
@@ -98,11 +93,10 @@ class ContactController extends Controller
      */
     public function contactsEditAction(Request $request, $id, FileUploader $fileUploader)
     {
-        //die("COMING HERE ");
+        
         $entityManager = $this->getDoctrine()->getManager();
         $contact = $this->getDoctrine()->getRepository(Contact::class)->find($id);
-        //var_dump($contact);
-        //die("TEST"); 
+
         $contact->setFirstname($request->get('firstname'));
         $contact->setLastname($request->get('lastname'));
         $contact->setEmail($request->get('email'));
