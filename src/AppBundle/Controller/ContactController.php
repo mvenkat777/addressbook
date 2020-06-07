@@ -17,8 +17,7 @@ class ContactController extends Controller
      */
     public function listAction(Request $request)
     {
-        $contacts = $this->getDoctrine()->getRepository(Contact::class)->findAll();        
-        
+        $contacts = $this->getDoctrine()->getRepository(Contact::class)->findAllOrderedByFirstName();         
         return $this->render('contacts/view.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'contacts' => $contacts,
